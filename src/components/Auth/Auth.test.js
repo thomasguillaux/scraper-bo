@@ -1,45 +1,35 @@
-import React from 'react';
-import { render, fireEvent, waitFor } from '@testing-library/react';
-import { act } from 'react-dom/test-utils';
+import { render, fireEvent } from '@testing-library/react';
 import Auth from './Auth';
 import { auth } from '../../services/firebase';
-import '@testing-library/jest-dom/extend-expect'; 
 
-// Mock the auth module and its methods
 jest.mock('../../services/firebase', () => ({
   auth: {
-    signInWithPopup: jest.fn().mockResolvedValue({ user: { displayName: 'test user' } }),
-    signOut: jest.fn().mockResolvedValue('Sign out successful'),
     onAuthStateChanged: jest.fn(),
+    signOut: jest.fn(),
   },
-  }));
-  
+}));
 
-test('renders sign in button when no user is authenticated', () => {
-  const { getByText } = render(<Auth />);
-  const signInButton = getByText(/sign in with google/i);
-  expect(signInButton).toBeInTheDocument();
-});
+describe('Auth Component', () => {
+  it('renders without crashing', () => {
+    render(<Auth />);
+  });
 
-test('renders sign out button when user is authenticated', async () => {
-  auth.onAuthStateChanged.mockImplementationOnce((callback) => callback({ displayName: 'test user' }));
+  it('toggles between sign in and register', () => {
+    const { getByText } = render(<Auth />);
+    const toggleButton = getByText('Switch to Register');
 
-  const { getByText } = await waitFor(() => render(<Auth />));
-  const signOutButton = getByText(/log out/i);
-  expect(signOutButton).toBeInTheDocument();
-});
+    fireEvent.click(toggleButton);
+    expect(getByText('Switch to Sign In')).toBeTruthy();
+  });
 
-test('signs out when sign out button is clicked', async () => {
-    auth.onAuthStateChanged.mockImplementationOnce((callback) => callback({ displayName: 'test user' }));
-  
-    const { getByText } = await waitFor(() => render(<Auth />));
-    const signOutButton = getByText(/log out/i);
-  
-    await act(async () => {
-      fireEvent.click(signOutButton);
-    });
-  
+  it('handles sign out when user is logged in', async () => {
+    auth.onAuthStateChanged.mockImplementationOnce((callback) => callback({ uid: 'testUser' }));
+    const { getByText } = render(<Auth />);
+    const signOutButton = getByText('Log Out');
+    
+    auth.signOut.mockResolvedValue();
+    fireEvent.click(signOutButton);
+
     expect(auth.signOut).toHaveBeenCalled();
   });
-  
-  
+});

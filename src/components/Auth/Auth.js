@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { auth } from '../../services/firebase';
 import './auth.css';
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
+import SignIn from './SignIn/SignIn';
+import Register from './Register/Register';
 
 const Auth = () => {
   const [user, setUser] = useState(null);
+  const [isRegistering, setIsRegistering] = useState(false);
 
   useEffect(() => {
     // add a realtime listener
@@ -18,22 +19,6 @@ const Auth = () => {
     });
   }, []);
 
-  const signInWithGoogle = () => {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    provider.setCustomParameters({
-      prompt: 'select_account'
-    });
-    auth.signInWithPopup(provider)
-      .then((result) => {
-        // User signed in
-        console.log('User successfully signed in with Google:', result.user);
-      })
-      .catch((error) => {
-        // Handle Errors here.
-        console.error('Error signing in with Google:', error);
-      });
-  };
-
   const logOut = async () => {
     try {
       await auth.signOut();
@@ -41,6 +26,10 @@ const Auth = () => {
     } catch (error) {
       console.error('Error signing out:', error);
     }
+  };
+
+  const toggleMode = () => {
+    setIsRegistering(!isRegistering);
   };
 
   return (
@@ -51,13 +40,15 @@ const Auth = () => {
           Log Out
         </button>
       ) : (
-        <button className="button" onClick={signInWithGoogle}>
-          Sign in with Google
-        </button>
+        <>
+          {isRegistering ? <Register /> : <SignIn />}
+          <button onClick={toggleMode}>
+            {isRegistering ? 'Switch to Sign In' : 'Switch to Register'}
+          </button>
+        </>
       )}
     </div>
   );
 };
 
 export default Auth;
-
