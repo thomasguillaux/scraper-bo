@@ -1,0 +1,27 @@
+/* auth.css */
+
+.container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  .title {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .button {
+    display: block;
+    width: 100%;
+    padding: 0.75rem;
+    margin-top: 1rem;
+    font-size: 1rem;
+    text-align: center;
+    background-color: #4a86e8;
+    color: white;
+    border-radius: 0.25rem;
+    cursor: pointer;
+  }
+  
