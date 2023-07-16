@@ -3,6 +3,7 @@ import { render, fireEvent, waitFor } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 import Auth from './Auth';
 import { auth } from '../../services/firebase';
+import '@testing-library/jest-dom/extend-expect'; 
 
 // Mock the auth module and its methods
 jest.mock('../../services/firebase', () => ({

@@ -1,4 +1,4 @@
-# [Your Project Name]
+# Scraper-BO
 ![build-status](https://img.shields.io/badge/build-passing-brightgreen)
 ![version](https://img.shields.io/badge/version-1.0.0-blue)
 ![license](https://img.shields.io/badge/license-MIT-green)
@@ -24,21 +24,21 @@ Scraper-BO is a back office React application that helps set up different web sc
 
 ### Installation
 1. Clone this repo:
-\```bash
+```bash
 git clone https://github.com/thomasguillaux/scraper-bo.git
-\```
+```
 2. Navigate to the project directory:
-\```bash
+```bash
 cd scraper-bo
-\```
+```
 3. Install NPM packages:
-\```bash
+```bash
 npm install
-\```
+```
 4. Run the app in the development mode:
-\```bash
+```bash
 npm start
-\```
+```
 ## Contributing
 Scraper-BO uses Husky and commitlint to ensure a clean, consistent commit history. Husky enables us to easily use git hooks, running scripts before every commit to ensure that only valid commits are made. commitlint is used to ensure commits adhere to a given format. This helps with versioning, maintaining the changelog, and navigating the project history.
 
