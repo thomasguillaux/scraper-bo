@@ -43,7 +43,7 @@ const Auth = () => {
         <>
           {isRegistering ? <Register /> : <SignIn />}
           <button onClick={toggleMode}>
-            {isRegistering ? 'Switch to Sign In' : 'Switch to Register'}
+            {isRegistering ?  'Go back to Sign In':`Don't have an account ? Please register`}
           </button>
         </>
       )}

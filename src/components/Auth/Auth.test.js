@@ -16,10 +16,10 @@ describe('Auth Component', () => {
 
   it('toggles between sign in and register', () => {
     const { getByText } = render(<Auth />);
-    const toggleButton = getByText('Switch to Register');
+    const toggleButton = getByText("Don't have an account ? Please register");
 
     fireEvent.click(toggleButton);
-    expect(getByText('Switch to Sign In')).toBeTruthy();
+    expect(getByText('Go back to Sign In')).toBeTruthy();
   });
 
   it('handles sign out when user is logged in', async () => {

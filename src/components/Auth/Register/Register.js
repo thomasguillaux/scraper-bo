@@ -22,7 +22,7 @@ const Register = () => {
 
     return (
         <div>
-          <h2>Register</h2>
+          <h2 data-testid="register-heading">Register</h2>
           <input
             type="email"
             placeholder="Email"
