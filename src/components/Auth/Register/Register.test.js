@@ -1,6 +1,5 @@
 // Import libraries and components first
 import { render, fireEvent } from '@testing-library/react';
-import { waitFor } from '@testing-library/dom';
 
 import Register from './Register';
 import { auth } from '../../../services/firebase';
